@@ -1,40 +1,32 @@
 pipeline {
-  agent any
+    agent any
 
-  stages {
-    stage('Checkout Code') {
-      steps {
-        checkout scm
-      }
-    }
-
-    stage('Install Dependencies') {
-      steps {
-        dir('Playwright-Test') {
-          bat 'npm ci'
-          bat 'npx playwright install --with-deps chromium'
+    stages {
+        stage('1. Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/CLOUDYMMM/Test-Automation-assignment.git'
+            }
         }
-      }
-    }
 
-    stage('Run Playwright Tests') {
-      steps {
-        dir('Playwright-Test') {
-          bat 'npx playwright test --reporter=html'
+        stage('2. Install Dependencies') {
+            steps {
+                bat 'npm install'
+                bat 'npx playwright install chromium --with-deps'
+            }
         }
-      }
+
+        stage('3. Run Playwright Tests') {
+            steps {
+                bat 'npx playwright test --reporter=html,junit'
+            }
+        }
     }
 
-    stage('Archive Results') {
-      steps {
-        archiveArtifacts artifacts: 'Playwright-Test\\playwright-report\\**', allowEmptyArchive: true
-      }
-    }
-  }
+    post {
+        always {
 
-  post {
-    always {
-      junit 'Playwright-Test\\test-results\\**\\*.xml'
+            archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
+            junit testResults: 'test-results/**/*.xml', allowEmptyResults: true
+        }
     }
-  }
 }
