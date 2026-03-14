@@ -4,29 +4,32 @@ pipeline {
     stages {
         stage('1. Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/CLOUDYMMM/Test-Automation-assignment.git'
+                git 'https://github.com/CLOUDYMMM/Test-Automation-assignment.git'
             }
         }
 
         stage('2. Install Dependencies') {
             steps {
-                bat 'npm install'
-                bat 'npx playwright install chromium --with-deps'
+                dir('Playwright-Test') {
+                    bat 'npm install'
+                    bat 'npx playwright install chromium --with-deps'
+                }
             }
         }
 
-        stage('3. Run Playwright Tests') {
+        stage('3. Run Tests') {
             steps {
-                bat 'npx playwright test --reporter=html,junit'
+                dir('Playwright-Test') {
+                    bat 'npx playwright test --reporter=html,junit'
+                }
             }
         }
     }
 
     post {
         always {
-
-            archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
-            junit testResults: 'test-results/**/*.xml', allowEmptyResults: true
+            archiveArtifacts artifacts: 'Playwright-Test/playwright-report/**', allowEmptyArchive: true
+            junit testResults: 'Playwright-Test/test-results/**/*.xml', allowEmptyResults: true
         }
     }
 }
