@@ -4,7 +4,7 @@ This project demonstrates automation testing using Playwright for web UI and API
 
 ## Project Structure
 
-- **Jenkinsfile/**: Contains Jenkins pipeline configuration for CI/CD.
+- **Jenkinsfile**: Jenkins pipeline configuration for CI/CD.
 - **Playwright-Test/**: Playwright-based tests.
   - `package.json`: Dependencies and scripts.
   - `playwright.config.ts`: Playwright configuration.
@@ -79,3 +79,19 @@ This project demonstrates automation testing using Playwright for web UI and API
 - API tests use the public ReqRes API (https://reqres.in/).
 - UI tests use The Internet Herokuapp (https://the-internet.herokuapp.com/login).
 - Ensure internet connection for external API/UI tests.
+
+## Jenkins CI/CD (Pipeline)
+This repository includes a `Jenkinsfile` that runs the Playwright tests and publishes results.
+
+### How to run
+1. Install Jenkins (e.g., via Windows installer).
+2. Create a **Pipeline** job and set **Pipeline script from SCM**.
+3. Point Jenkins to this repository and ensure **Script Path** is `Jenkinsfile`.
+4. Run the job.
+
+### What it does
+- Checks out the repo
+- Installs dependencies (`npm ci`)
+- Installs Playwright browsers (`npx playwright install --with-deps chromium`)
+- Runs tests and generates HTML + JUnit output
+- Archives report artifacts and publishes JUnit results
