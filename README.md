@@ -13,6 +13,7 @@ This project demonstrates automation testing using Playwright for web UI and API
     - `2-UI.spec.ts`: UI tests for login functionality (success, invalid password, invalid username).
 - **Python-Logic-Test/**: Python scripts for logic testing.
   - `1-Logic.py`: Script to find duplicate items between two lists using set intersection.
+  - `5-logic.py`: Simple Caesar cipher decryption to demonstrate string transformation logic.
 
 ## Prerequisites
 
@@ -49,17 +50,29 @@ This project demonstrates automation testing using Playwright for web UI and API
    cd Python-Logic-Test
    ```
 
-2. Run the script:
-   ```
-   python 1-Logic.py
-   ```
+2. Run one of the scripts:
+   - Duplicate list finder:
+     ```
+     python 1-Logic.py
+     ```
 
-   Expected output:
-   ```
-   List A: [1, 2, 3, 5, 6, 8, 9]
-   List B: [3, 2, 1, 5, 6, 0]
-   Duplicate Items: [1, 2, 3, 5, 6]
-   ```
+     Expected output:
+     ```
+     List A: [1, 2, 3, 5, 6, 8, 9]
+     List B: [3, 2, 1, 5, 6, 0]
+     Duplicate Items: [1, 2, 3, 5, 6]
+     ```
+
+   - Caesar cipher decrypt (shift by k):
+     ```
+     python 5-logic.py
+     ```
+
+     Expected output (with k=2):
+     ```
+     Encrypted: VTAOG (k=2)
+     Decrypted: STRING
+     ```
 
 ## Test Descriptions
 
