@@ -1,4 +1,4 @@
-# TTB Automation Assignment (Playwright)
+# Automation Assignment (Playwright)
 
 This project demonstrates automation testing using Playwright for web UI and API tests, along with Python logic validation.
 
